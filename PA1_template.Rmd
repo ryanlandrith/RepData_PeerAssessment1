@@ -7,13 +7,18 @@ output:
 
 
 ## Loading and preprocessing the data
+```{r}
+library(dplyr)
+data <- read.csv(file="activity.csv")
 
-
-
+```
 ## What is mean total number of steps taken per day?
+```{r}
+by_date <- data %>% group_by(date)
+steps_per_day <- by_date %>% summarise(steps=mean(steps,na.rm=T))
+plotly::plot_ly(steps_per_day,x=~steps,type = "histogram",nbinsx=length(steps_per_day$date))
 
-
-
+```
 ## What is the average daily activity pattern?
 
 
